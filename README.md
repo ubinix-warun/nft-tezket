@@ -4,6 +4,8 @@ Tezket -- "Tezos Ticket", Backend operator -- Mint NFT ticket (Tezos Smartcontra
 
 # System Architecture
 
+<img src="https://user-images.githubusercontent.com/3756229/175788708-b82f53d9-f455-4986-9e5c-b967d8d4876c.png" height="400">
+
 
 # Setup Smartcontract & Config Backend
 
