@@ -1,6 +1,6 @@
 # NFT-Tezket
 
-Tezket -- "Tezos Ticket", Backend operator -- Mint NFT ticket (Tezos Smartcontract) and process api payment with Square web-sdk., [MIT LICENSE](https://github.com/ubinix-warun/rn-tezket/blob/master/LICENSE)
+Tezket -- "Tezos Ticket", Backend operator -- Mint NFT ticket (Tezos Smartcontract)., [MIT LICENSE](https://github.com/ubinix-warun/rn-tezket/blob/master/LICENSE)
 
 # System Architecture
 
