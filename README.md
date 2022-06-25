@@ -53,7 +53,9 @@ npm run dev      # dev mode!
     "tag": "1 DAY PASS",
     "keyword": "The Silicon Valley of India.",
     "description": "Bengaluru (also called Bangalore) is the center of India's high-tech\nindustry. The city is also known for its parks and nightlife.",
-    "timepref": "Vaild in 10/06/2022",
+    "timepref": "Vaild in 22/07/2022",
+    "startperiod": "20/07/2022",
+    "endperiod": "22/07/2022",
     "render": "SQ1QR"
 }
 ```
