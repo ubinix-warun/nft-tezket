@@ -81,6 +81,14 @@ npm run dev      # dev mode!
        `;
 ```
 
+* Edit new ticket type on src/screens/Tickets.tsx. [rn-tezket](https://github.com/ubinix-warun/rn-tezket)
+
+```
+export const TicketList: TicketInfo[] = [
+  ...
+];
+```
+
 # Credit
 
 * Use [ExpressJS/TS](https://expressjs.com/) for API TypeScript Server.
