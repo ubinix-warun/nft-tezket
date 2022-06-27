@@ -63,13 +63,13 @@ npm run dev      # dev mode!
 }
 ```
 
-* Patch API '/mint' with new-ticket-type.
+* Patch API '/mint' with new-render-type or use defaults "SQ1QR".
 ```
     else if(mintTicket.render == "new-ticket-type") {
 
 ```
 
-* Customize ticket-template with SVG.
+* (optional) Customize ticket-template with SVG.
 
 ```
       const svgImage = `
