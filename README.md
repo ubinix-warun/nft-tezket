@@ -4,7 +4,7 @@ Tezket -- "Tezos Ticket", Backend operator -- Mint NFT ticket (Tezos Smartcontra
 
 # System Architecture
 
-<img src="https://user-images.githubusercontent.com/3756229/175788708-b82f53d9-f455-4986-9e5c-b967d8d4876c.png" height="400">
+<img src="https://user-images.githubusercontent.com/3756229/175788708-b82f53d9-f455-4986-9e5c-b967d8d4876c.png" width="70%">
 
 1. [rn-tezket](https://github.com/ubinix-warun/rn-tezket) -- ReactNative app, Buy NFT ticket and use QR to control admittance at the gate.
 2. [nft-tezket](https://github.com/ubinix-warun/nft-tezket) -- Backend operator, Mint NFT ticket (Tezos Smartcontract).
