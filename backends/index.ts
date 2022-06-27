@@ -1,6 +1,8 @@
 import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
 
+import { WebSocketServer, WebSocket } from 'ws';
+
 dotenv.config();
 
 const app: Express = express();
@@ -48,8 +50,11 @@ const Tezos = new TezosToolkit(rpc);
 Tezos.setSignerProvider(signer);
 
 const port = process.env.NODE_ENV === "production" ? process.env.PORT : 8082; // default port to listen
+const portWs = process.env.NODE_ENV === "production" ? process.env.PORTWS : 8083; // default port to listen
+
 const corsOptions = {
-  origin: ["http://localhost:8082", "http://localhost:19006"],
+  origin: ["http://localhost:8082", "http://localhost:19006", "http://192.168.1.114:19006",
+  "https://dc8259a198fc.ap.ngrok.io"],
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 app.use(cors(corsOptions));
@@ -75,6 +80,91 @@ function respError(req: any, res: any, msg: any, err: any) {
       msg: msg
     });
 }
+
+let sockets = new Map<string, WebSocket>();
+const wss = new WebSocketServer({ port: 8083 });
+
+wss.on('connection', function connection(ws) {
+  ws.on('message', function message(data) {
+    console.log('received: %s', data);
+    // walletAddress, ws
+
+    const obj = JSON.parse(data.toString());
+
+    if(obj.userAddress != undefined) {
+      sockets.set(obj.userAddress, ws);
+    } else {
+
+      ws.close();
+    }
+  });
+
+  ws.on('close', function close() {
+    console.log('disconnected');
+  });
+
+  ws.send('something');
+});
+
+app.get('/sign/:address/:gateaddress', async function (req: Request, res: Response) {
+
+  const addr = req.params.address;
+  const gateaddr = req.params.gateaddress;
+
+  if(!sockets.has(addr)) {
+    respError(req,res,'ERR: Invalid sign.addr='+addr, null);
+    return ;
+  }
+
+  // if(!sockets.has(gateaddr)) {
+  //   respError(req,res,'ERR: Invalid sign.gateaddr='+gateaddr, null);
+  //   return ;
+  // }
+
+  sockets.get(addr)?.send(`SIGN:${req.params.gateaddress}`);
+    
+  res.status(200).json({ 
+    userAddress: req.params.address,
+    gateAddress: req.params.gateaddress
+  });
+
+});
+
+app.get('/use/:address/:ticketid/:signature/:gateaddress', async function (req: Request, res: Response) {
+
+  const addr = req.params.address;
+  const gateaddr = req.params.gateaddress;
+
+  if(!sockets.has(addr)) {
+    respError(req,res,'ERR: Invalid sign.addr='+addr, null);
+    return ;
+  }
+
+  // if(!sockets.has(gateaddr)) {
+  //   respError(req,res,'ERR: Invalid sign.gateaddr='+gateaddr, null);
+  //   return ;
+  // }
+
+  // SAVE
+  
+  sockets.get(gateaddr)?.send(`DONE:${req.params.address}`);
+
+  res.status(200).json({ 
+    userAddress: req.params.address,
+    ticketId: req.params.ticketid,
+    signature: req.params.signature,
+    gateAddress: req.params.gateaddress,
+  });
+
+});
+
+// app.get('/testwallet', async function (req: Request, res: Response) {
+
+//   sockets.forEach((ws: WebSocket) => {
+//     ws.send("testwallet");
+//   });
+//   res.send(`/testwallet`);
+// });
 
 app.post('/mint', async function(req, res) {
 
@@ -329,5 +419,5 @@ app.post('/mint', async function(req, res) {
 // });
 
 app.listen(port, () => {
-  console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
+  console.log(`⚡️[server]: Server is running at http://localhost:${port} \r\n\t\t\t & ws://localhost:${portWs}`);
 });
