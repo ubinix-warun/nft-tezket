@@ -1,4 +1,4 @@
-# NFT-Tezket
+# NFT-Tezket v1
 
 Tezket -- "Tezos Ticket", Backend operator -- Mint NFT ticket (Tezos Smartcontract)., [MIT LICENSE](https://github.com/ubinix-warun/rn-tezket/blob/master/LICENSE)
 
@@ -6,8 +6,13 @@ Tezket -- "Tezos Ticket", Backend operator -- Mint NFT ticket (Tezos Smartcontra
 
 <img src="https://user-images.githubusercontent.com/3756229/175788708-b82f53d9-f455-4986-9e5c-b967d8d4876c.png" width="70%">
 
+### Version 2 -- Revision by [TezKet](https://github.com/tezket/)
+* [Pitch Gist!](https://gist.github.com/ubinix-warun/fe48b4e72457b59cb01a732b6abde4c0) -- Intro & Roadmap.
+
+### Version 1
 1. [rn-tezket](https://github.com/ubinix-warun/rn-tezket) -- ReactNative app, Buy NFT ticket and use QR to control admittance at the gate.
 2. [nft-tezket](https://github.com/ubinix-warun/nft-tezket) -- Backend operator, Mint NFT ticket (Tezos Smartcontract).
+
 
 ## Demo
 
